@@ -1,0 +1,250 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    outline: none;
+    border: none;
+    border-radius: 0px;
+    color: black;
+    background-color: transparent;
+    transition: 0.5s;
+    scrollbar-color: #484848 #000000;
+    user-select: none;
+    overflow-x: hidden;
+}
+*::-webkit-scrollbar {
+    width: 0.53vw;
+    height: 0.53vw;
+    padding: 1vw;
+    background-color: #000000;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: #484848;
+}
+:root {
+    --pageButton_size: 70px;
+    --pageButtonsBox_padding: 40px;
+    --notification_borderRadius: 15px;
+}
+html, body {
+    background-color: #1e1e1e;
+}
+
+.fullW{
+    width: 100vw;
+}
+.fullH{
+    height: 100vh;
+}
+.centerX{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.centerY{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+[class^="controlButton-"] {
+    width: var(--pageButton_size);
+    height: var(--pageButton_size);
+    --bgi: url('../image/control_default.png');
+    background-image: var(--bgi);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: var(--pageButton_size);
+    box-sizing: border-box;
+}
+[class^="controlButton-"]:hover {
+    background-color: #ffffff88;
+}
+
+#pageButtonsPos {
+    width: 0px;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    overflow: visible;
+}
+#pageButtonsBox {
+    gap: var(--pageButtonsBox_padding);
+    padding: 0px var(--pageButtonsBox_padding);
+    position: absolute;
+    right: 0px;
+    box-sizing: border-box;
+    overflow: visible;
+}
+#pageButtonsBox > button {
+    width: var(--pageButton_size);
+    height: var(--pageButton_size);
+    --bgi: url('../image/page_default.png');
+    background-image: var(--bgi);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+    border-radius: 15px;
+}
+#pageButtonsBox > button:hover {
+    background-color: #ffffff88;
+    transform: rotateZ(360deg);
+}
+#pagesBox > div {
+    padding: 0vw calc(var(--pageButtonsBox_padding)*2 + var(--pageButton_size));
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    /* position: relative; */
+    top: 0px;
+    left: 0px;
+    box-sizing: border-box;
+}
+#pagesBox > div > .lock {
+    padding: 50px 0px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+[page="show"] {
+    opacity: 1;
+    pointer-events: auto;
+}
+[page="hide"] {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.notification {
+    display: grid;
+    grid-template-columns: 100px auto;
+    grid-template-rows: 100px;
+    margin: 0px 0px 1vw 0px;
+    width: 100%;
+    height: 100px;
+    position: relative;
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+    border-radius: var(--notification_borderRadius);
+    box-sizing: border-box;
+    overflow: visible;
+}
+.notification .site {
+    --bgi: url('../image/site_default.png');
+    background-image: var(--bgi);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.notification .site::before {
+    position: absolute;
+    content: attr(data-text);
+    color: white;
+    transform: rotateZ(-90deg) translateY(-65px);
+}
+.notification .content {
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+}
+.notification .image {
+    
+}
+.notification .time {
+    color: white;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+.notification .mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: linear-gradient(to right, transparent 0%, white 100%);
+    border-radius: var(--notification_borderRadius);
+    opacity: 0;
+}
+.notification .mask::after {
+    content: 'see more >';
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+.notification:hover .mask {
+    opacity: 1;
+}
+#notificationsBox .controlButton-trashCan {
+    position: absolute;
+    right: var(--pageButtonsBox_padding);
+    bottom: var(--pageButtonsBox_padding);
+}
+
+.account {
+    margin: 0px 0px 1vw 0px;
+    padding: 10px;
+    width: 100%;
+    position: relative;
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+    border-radius: var(--notification_borderRadius);
+    box-sizing: border-box;
+    overflow: visible;
+}
+.account .site {
+    color: white;
+}
+.account .row {
+    display: grid;
+    grid-template-columns: 100px auto;
+    grid-template-rows: auto;
+    gap: 10px;
+}
+.account .row::marker {
+    color: white;
+}
+.account :where(label, input) {
+    color: #fefefe;
+}
+
+.timing {
+    margin: 0px 0px 1vw 0px;
+    padding: 10px;
+    width: 100%;
+    position: relative;
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+    border-radius: var(--notification_borderRadius);
+    box-sizing: border-box;
+    overflow: visible;
+}
+.timing .site {
+    color: white;
+}
+.timing .row {
+    display: grid;
+    grid-template-columns: 15px 100px auto;
+    grid-template-rows: auto;
+    gap: 10px;
+}
+.timing .row::marker {
+    color: white;
+}
+.timing :where(label, input) {
+    color: #fefefe;
+    filter: hue-rotate(105deg);
+}

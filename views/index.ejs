@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <!-- 2023 © MaoHuPi -->
+    <title>Auto Browse</title>
+    <base href="/">
+    <link rel="stylesheet" href="style/main.css">
+    <script src="script/basic.js"></script>
+    <script>
+        const csrf = '<%=csrf%>';
+        let pageNow = '<%=page%>';
+    </script>
+</head>
+<body>
+    <div id="pagesBox" class="fullW fullH">
+        <div id="notificationsBox">
+            <div class="lock"></div>
+            <button class="controlButton-trashCan" onclick="clearNotifications();"></button>
+        </div>
+        <div id="accountsBox">
+            <div class="lock"></div>
+        </div>
+        <div id="timingBox">
+            <div class="lock"></div>
+        </div>
+    </div>
+    <div id="pageButtonsPos" class="fullH centerY">
+        <div id="pageButtonsBox" class="centerY">
+            <button id="pageButton-notifications"></button>
+            <button id="pageButton-accounts"></button>
+            <button id="pageButton-timing"></button>
+        </div>
+    </div>
+    <script src="script/main.js"></script>
+</body>
+</html>

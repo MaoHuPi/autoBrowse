@@ -1,0 +1,40 @@
+{
+    "gamer": {
+        "dailyCheck": [
+            true,
+            24
+        ],
+        "screenShot": [
+            false,
+            24
+        ]
+    },
+    "instagram": {
+        "notification": [
+            true,
+            1
+        ],
+        "message": [
+            false,
+            24
+        ],
+        "screenShot": [
+            false,
+            24
+        ]
+    }, 
+    "bing": {
+        "dailyTask": [
+            true,
+            12
+        ],
+        "dailySearch": [
+            true,
+            12
+        ],
+        "screenShot": [
+            false,
+            24
+        ]
+    }
+}
