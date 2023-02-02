@@ -1,4 +1,4 @@
-/* 
+/*
  * 2023 © MaoHuPi
  */
 
@@ -40,18 +40,18 @@ exports.instagram = async function instagram(browser, account, commands){
             function lastOf(arr){return(arr[arr.length-1]);}
             let data = [...document.querySelectorAll('[data-pressable-container="true"]')]
                 .map(r => ({
-                    content: r.innerText, 
-                    link: lastOf(r.querySelectorAll('a[href]')).href, 
+                    content: r.innerText,
+                    link: lastOf(r.querySelectorAll('a[href]')).href,
                     image: lastOf(r.querySelectorAll('img[src]')).src
                 }));
             data.forEach(o => {o.identify = o.content.replaceAll(' ', '').replaceAll(/[0-9]+(秒|分鐘|小時|天|週|年)/g, '');});
             return(data);
         });
-        let timestemp = new Date().getTime();
+        let timestamp = new Date().getTime();
         notifications.forEach(o => {
             o.site = 'instagram';
             o.type = 'notification';
-            o.time = timestemp;
+            o.time = timestamp;
             o.identify = md5(`${o.identify}${o.link}`);
         });
         page.close();
@@ -67,7 +67,7 @@ exports.instagram = async function instagram(browser, account, commands){
         }
         await fsp.writeFile(notificationPath, JSON.stringify(notifications, null, 4));
         notifications = basic.identifyFilter(notifications, oldNotifications);
-        
+
         oldNotifications = [];
         if(basic.fileExists(settings.notificationsDataPath)){
             let notificationsString = await fsp.readFile(settings.notificationsDataPath);
@@ -101,8 +101,8 @@ exports.instagram = async function instagram(browser, account, commands){
         await fsp.writeFile(cookiePath, JSON.stringify(cookies, null, 4));
     // }
     let commandData = {
-        'notification': processNotification, 
-        'message': processMessage, 
+        'notification': processNotification,
+        'message': processMessage,
         'screenShot': () => {page.screenshot({path: instagramPath + 'screenShot.png', overwrite: true});}
     };
     await basic.runCommands(commandData, commands);
@@ -126,7 +126,7 @@ exports.gamer = async function gamer(browser, account, commands){
         await basic.clickSubmit(page, '#btn-login');
         await basic.sleep(1);
     }
-    async function singin(){
+    async function signin(){
         let page = await browser.newPage();
         await page.goto(gamerUrl);
         await basic.click(page, '#signin-btn');
@@ -138,7 +138,7 @@ exports.gamer = async function gamer(browser, account, commands){
     }
     await login();
     let commandData = {
-        'dailyCheck': singin, 
+        'dailyCheck': signin,
         'screenShot': () => {page.screenshot({path: gamerPath + 'screenShot.png', overwrite: true});}
     };
     await basic.runCommands(commandData, commands);
@@ -213,7 +213,7 @@ exports.bing = async function bing(browser, account, commands){
         for(let i = 0; i < 10; i++){
             await page.goto(bingUrl);
             await basic.sleep(3);
-            
+
             await basic.type(page, '[name="q"]', `number ${i}`);
             await basic.sleep(2);
             // await basic.clickSubmit(page, '[type="submit"][name="search"]');
@@ -224,8 +224,8 @@ exports.bing = async function bing(browser, account, commands){
     }
     await login();
     let commandData = {
-        'dailyTask': dailyTask, 
-        'dailySearch': dailySearch, 
+        'dailyTask': dailyTask,
+        'dailySearch': dailySearch,
         'screenShot': () => {page.screenshot({path: bingPath + 'screenShot.png', overwrite: true});}
     };
     await basic.runCommands(commandData, commands);

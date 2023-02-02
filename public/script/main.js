@@ -1,6 +1,6 @@
 'use-strict';
 
-let timeLocalString = creatDataBuffer(timespen => new Date(timespen).toLocaleString());
+let timeLocalString = createDataBuffer(timespan => new Date(timespan).toLocaleString());
 
 /* pageButtons */
 function changePage(pageName){
@@ -34,11 +34,11 @@ $$('[class^="controlButton-"]').forEach(button => {
 let notificationsBox = $('#notificationsBox');
 let notificationsBox_lock = $('.lock', notificationsBox);
 function pushNotificationElement(data){
-    let notification = $e('div'), 
-        content = $e('div'), 
-        image = $e('img'), 
-        site = $e('div'), 
-        time = $e('div'), 
+    let notification = $e('div'),
+        content = $e('div'),
+        image = $e('img'),
+        site = $e('div'),
+        time = $e('div'),
         mask = $e('div');
     site.className = 'site centerX centerY';
     site.setAttribute('data-text', data.site || '');
@@ -81,14 +81,14 @@ loadNotifications();
 let accountsBox = $('#accountsBox');
 let accountsBox_lock = $('.lock', accountsBox);
 function pushAccountElement(siteName, data){
-    let account = $e('div'), 
+    let account = $e('div'),
         site = $e('h2');
     site.className = 'site';
     site.innerText = siteName;
     account.appendChild(site);
     for(i in data){
-        let row = $e('li'), 
-            text = $e('label'), 
+        let row = $e('li'),
+            text = $e('label'),
             input = $e('input');
         text.innerText = i;
         row.appendChild(text);
@@ -133,15 +133,15 @@ loadAccounts();
 let timingBox = $('#timingBox');
 let timingBox_lock = $('.lock', timingBox);
 function pushTimingElement(siteName, data){
-    let timing = $e('div'), 
+    let timing = $e('div'),
         site = $e('h2');
     site.className = 'site';
     site.innerText = siteName;
     timing.appendChild(site);
     for(i in data){
-        let row = $e('li'), 
-            text = $e('label'), 
-            enabled = $e('input'), 
+        let row = $e('li'),
+            text = $e('label'),
+            enabled = $e('input'),
             deltaTime = $e('input');
         enabled.id = `timing-${siteName}-${i}-0`;
         text.setAttribute('for', enabled.id);
@@ -159,8 +159,8 @@ function pushTimingElement(siteName, data){
             if(idData.length < 4 || idData[0] != 'timing'){
                 return;
             }
-            let value = idData[3] == '0' ? this.checked : 
-                idData[3] == '1' ? this.value : 
+            let value = idData[3] == '0' ? this.checked :
+                idData[3] == '1' ? this.value :
                 'undefine';
             idData.shift();
             fetch(`timing/update/${csrf}/${idData.join('.')}/${value}`, {method: "POST"})
