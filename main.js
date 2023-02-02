@@ -1,4 +1,4 @@
-/* 
+/*
  * 2023 © MaoHuPi
  */
 
@@ -16,7 +16,7 @@ const csrf = '1234567890'
     .sort((a,b)=>Math.random() - 0.5)
     .join('');
 returnDataDefault = {
-    state: true, 
+    state: true,
     data: false
 };
 let notifications = {};
@@ -61,7 +61,7 @@ function server(){
     });
     app.post('/notifications/:control/:csrf/', async function(req, res){
         if(!(req.params?.csrf === csrf)){
-            res.send('csrf dosn\'t match!');
+            res.send('csrf doesn\'t match!');
             return;
         }
         let returnData = basic.deepCopy(returnDataDefault);
@@ -81,7 +81,7 @@ function server(){
     });
     app.post('/accounts/:control/:csrf/:key/:value', async function(req, res){
         if(!(req.params?.csrf === csrf)){
-            res.send('csrf dosn\'t match!');
+            res.send('csrf doesn\'t match!');
             return;
         }
         let returnData = basic.deepCopy(returnDataDefault);
@@ -103,7 +103,7 @@ function server(){
     });
     app.post('/timing/:control/:csrf/:key/:value', async function(req, res){
         if(!(req.params?.csrf === csrf)){
-            res.send('csrf dosn\'t match!');
+            res.send('csrf doesn\'t match!');
             return;
         }
         let returnData = basic.deepCopy(returnDataDefault);
@@ -123,9 +123,9 @@ function server(){
     app.listen(settings.port);
 }
 
-let broeseLoopCounter = 0;
-function broeseLoop(){
-    setTimeout(broeseLoop, 60*60*1000);
+let browseLoopCounter = 0;
+function browseLoop(){
+    setTimeout(browseLoop, 60*60*1000);
     (async () => {
         const browser = await puppeteer.launch(settings.debugMode ? {headless: false} : {});
         for(let siteName in timing){
@@ -134,16 +134,16 @@ function broeseLoop(){
                 .filter(data => data[1])
                 .map(data => data[0])
                 .map(command => [command, timing[siteName][command][1]])
-                .filter(data => broeseLoopCounter%data[1] == 0)
+                .filter(data => browseLoopCounter%data[1] == 0)
                 .map(data => data[0]);
-            console.log(`broese > site['${siteName}'](browser, ${JSON.stringify(accounts[siteName])}, ${JSON.stringify(commands)});`);
+            console.log(`browse > site['${siteName}'](browser, ${JSON.stringify(accounts[siteName])}, ${JSON.stringify(commands)});`);
             await site[siteName](browser, accounts[siteName], commands);
         }
         if(!settings.debugMode){
             await browser.close();
         }
     })();
-    broeseLoopCounter++;
+    browseLoopCounter++;
 }
 
 async function main(){
@@ -154,7 +154,7 @@ async function main(){
     open(`http://localhost:${settings.port}`);
 
     let dateNow = new Date();
-    setTimeout(broeseLoop, ((60 - dateNow.getMinutes())*60 - dateNow.getSeconds())*1000); 
-    // setTimeout(broeseLoop, 0); 
+    setTimeout(browseLoop, ((60 - dateNow.getMinutes())*60 - dateNow.getSeconds())*1000);
+    // setTimeout(browseLoop, 0);
 }
 main();

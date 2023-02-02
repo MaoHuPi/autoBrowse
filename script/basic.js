@@ -1,4 +1,4 @@
-/* 
+/*
  * 2023 © MaoHuPi
  */
 
@@ -54,8 +54,8 @@ exports.deepCopy = function deepCopy(o){
     return(JSON.parse(JSON.stringify(o)));
 }
 exports.identifyFilter = function identifyFilter(notifications, oldNotifications){
-    let oldIdentifys = oldNotifications.map(o => o.identify);
-    notifications = notifications.filter(o => !(oldIdentifys.indexOf(o.identify) > -1));
+    let oldIdentifies = oldNotifications.map(o => o.identify);
+    notifications = notifications.filter(o => !(oldIdentifies.indexOf(o.identify) > -1));
     return(notifications);
 }
 exports.before = async function before(page){
