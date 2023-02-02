@@ -126,7 +126,7 @@ exports.gamer = async function gamer(browser, account, commands){
         await basic.clickSubmit(page, '#btn-login');
         await basic.sleep(1);
     }
-    async function singin(){
+    async function signin(){
         let page = await browser.newPage();
         await page.goto(gamerUrl);
         await basic.click(page, '#signin-btn');
@@ -138,7 +138,7 @@ exports.gamer = async function gamer(browser, account, commands){
     }
     await login();
     let commandData = {
-        'dailyCheck': singin, 
+        'dailyCheck': signin, 
         'screenShot': () => {page.screenshot({path: gamerPath + 'screenShot.png', overwrite: true});}
     };
     await basic.runCommands(commandData, commands);
